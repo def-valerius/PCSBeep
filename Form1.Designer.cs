@@ -1,4 +1,4 @@
-﻿namespace PSCBeep
+﻿namespace PCSBeep
 {
     partial class Form1
     {
@@ -43,6 +43,7 @@
             this.tbFreq.Name = "tbFreq";
             this.tbFreq.Size = new System.Drawing.Size(127, 20);
             this.tbFreq.TabIndex = 0;
+            this.tbFreq.Text = "440000";
             // 
             // tbDur
             // 
@@ -50,6 +51,7 @@
             this.tbDur.Name = "tbDur";
             this.tbDur.Size = new System.Drawing.Size(127, 20);
             this.tbDur.TabIndex = 1;
+            this.tbDur.Text = "100";
             // 
             // label1
             // 

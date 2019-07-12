@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 using System.Runtime.InteropServices;
 
-namespace PSCBeep
+namespace PCSBeep
 {
     public partial class Form1 : Form
     {
