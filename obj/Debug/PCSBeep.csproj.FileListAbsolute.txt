@@ -1,0 +1,9 @@
+Y:\vs_projects\PCSBeep\PSCBeep\PCSBeep\bin\Debug\PCSBeep.exe
+Y:\vs_projects\PCSBeep\PSCBeep\PCSBeep\bin\Debug\PCSBeep.pdb
+Y:\vs_projects\PCSBeep\PSCBeep\PCSBeep\obj\Debug\PCSBeep.csprojAssemblyReference.cache
+Y:\vs_projects\PCSBeep\PSCBeep\PCSBeep\obj\Debug\PSCBeep.Form1.resources
+Y:\vs_projects\PCSBeep\PSCBeep\PCSBeep\obj\Debug\PCSBeep.Properties.Resources.resources
+Y:\vs_projects\PCSBeep\PSCBeep\PCSBeep\obj\Debug\PCSBeep.csproj.GenerateResource.cache
+Y:\vs_projects\PCSBeep\PSCBeep\PCSBeep\obj\Debug\PCSBeep.csproj.CoreCompileInputs.cache
+Y:\vs_projects\PCSBeep\PSCBeep\PCSBeep\obj\Debug\PCSBeep.exe
+Y:\vs_projects\PCSBeep\PSCBeep\PCSBeep\obj\Debug\PCSBeep.pdb
