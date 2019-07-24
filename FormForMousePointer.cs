@@ -11,9 +11,9 @@ using System.Runtime.InteropServices;
 
 namespace PCSBeep
 {
-    public partial class Form1 : Form
+    public partial class FormForMousePointer : Form
     {
-        //<trying to beep
+//<trying to beep
         //32bit?
         [DllImport("inpout32.dll")]
         private static extern void Out32(short PortAddress, short Data);
@@ -28,7 +28,6 @@ namespace PCSBeep
 
         bool m_bX64 = true;
         uint intGFreq = 100000;
-        uint intGDur = 100;
         //bool blnStop = false;
         private void PleaseBeep(uint freq)
         {
@@ -37,7 +36,7 @@ namespace PCSBeep
                 Out32_x64(0x43, 0xB6);
                 Out32_x64(0x42, (byte)(freq & 0xFF));
                 Out32_x64(0x42, (byte)(freq >> 9));
-                System.Threading.Thread.Sleep(1);
+                System.Threading.Thread.Sleep(50);
                 Out32_x64(0x61, (byte)(Convert.ToByte(Inp32_x64(0x61)) | 0x03));
             }
             else
@@ -56,44 +55,47 @@ namespace PCSBeep
             else
                 Out32(0x61, (byte)(Convert.ToByte(Inp32(0x61)) & 0xFC));
         }
-        private void ThreadBeeper()
-        {
 
-            //for (uint i = 440000; i < 500000; i += 1000)
-            for (uint i = 1; i < intGDur; i++)
+        private void BeeperWithGlobalVariables()
+        {
+            while (blnBeep)
             {
-                //uint freq = 1193180000 / i; // 440Hz
-                uint freq = 1193180000 / intGFreq; // 440Hz
+                uint freq = 1193180000 / intGFreq;
                 PleaseBeep(freq);
-                //System.Threading.Thread.Sleep(1);
             }
             StopBeep();
-            //test
         }
-
         //beep>
-        public Form1()
+        bool blnBeep = false;
+        public FormForMousePointer()
         {
             InitializeComponent();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void FormForMousePointer_MouseDown(object sender, MouseEventArgs e)
         {
-
-        }
-
-        private void BtnBeep_Click(object sender, EventArgs e)
-        {
-            intGFreq = Convert.ToUInt32(tbFreq.Text);
-            intGDur = Convert.ToUInt32(tbDur.Text);
-            System.Threading.Thread t = new System.Threading.Thread(new System.Threading.ThreadStart(ThreadBeeper));
+            blnBeep = true;
+            //intGFreq = 440000;
+            System.Threading.Thread t = new System.Threading.Thread(new System.Threading.ThreadStart(BeeperWithGlobalVariables));
             t.Start();
         }
 
-        private void TestToolStripMenuItem_Click(object sender, EventArgs e)
+        private void FormForMousePointer_Load(object sender, EventArgs e)
         {
-            FormForMousePointer FormMouse = new FormForMousePointer();
-            FormMouse.Show();
+
+        }
+
+        private void FormForMousePointer_MouseMove(object sender, MouseEventArgs e)
+        {
+            var relativePoint = this.PointToClient(Cursor.Position);
+            lblX.Text = "X: " + Convert.ToString(relativePoint.X);
+            lblY.Text = "Y: " + Convert.ToString(relativePoint.Y);
+            intGFreq = Convert.ToUInt32(880000 - (1000 * relativePoint.Y));
+        }
+
+        private void FormForMousePointer_MouseUp(object sender, MouseEventArgs e)
+        {
+            blnBeep = false;
         }
     }
 }

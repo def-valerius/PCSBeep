@@ -7,3 +7,4 @@ Y:\vs_projects\PCSBeep\PSCBeep\PCSBeep\obj\Debug\PCSBeep.csproj.CoreCompileInput
 Y:\vs_projects\PCSBeep\PSCBeep\PCSBeep\obj\Debug\PCSBeep.exe
 Y:\vs_projects\PCSBeep\PSCBeep\PCSBeep\obj\Debug\PCSBeep.pdb
 Y:\vs_projects\PCSBeep\PSCBeep\PCSBeep\obj\Debug\PCSBeep.Form1.resources
+Y:\vs_projects\PCSBeep\PSCBeep\PCSBeep\obj\Debug\PCSBeep.FormForMousePointer.resources
