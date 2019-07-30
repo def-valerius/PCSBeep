@@ -1,19 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Windows.Forms;
 
 using System.Runtime.InteropServices;
 
 namespace PCSBeep
 {
-    public partial class Form1 : Form
-    {/*
-        //<trying to beep
+    class Class1
+    {
+//<trying to beep
+        public bool blnBeep = false;
+        public uint intGFreq = 100000;
+        public uint intGDur = 50;
         //32bit?
         [DllImport("inpout32.dll")]
         private static extern void Out32(short PortAddress, short Data);
@@ -27,8 +26,7 @@ namespace PCSBeep
         private static extern char Inp32_x64(short PortAddress);
 
         bool m_bX64 = true;
-        uint intGFreq = 100000;
-        uint intGDur = 100;
+
         //bool blnStop = false;
         private void PleaseBeep(uint freq)
         {
@@ -37,8 +35,10 @@ namespace PCSBeep
                 Out32_x64(0x43, 0xB6);
                 Out32_x64(0x42, (byte)(freq & 0xFF));
                 Out32_x64(0x42, (byte)(freq >> 9));
-                System.Threading.Thread.Sleep(1);
+                //System.Threading.Thread.Sleep(10);
+                System.Threading.Thread.Sleep(Convert.ToInt32(intGDur));
                 Out32_x64(0x61, (byte)(Convert.ToByte(Inp32_x64(0x61)) | 0x03));
+                //System.Threading.Thread.Sleep(Convert.ToInt32(intGDur));
             }
             else
             {
@@ -56,9 +56,8 @@ namespace PCSBeep
             else
                 Out32(0x61, (byte)(Convert.ToByte(Inp32(0x61)) & 0xFC));
         }
-        private void ThreadBeeper()
+        public void ThreadBeeper()
         {
-
             //for (uint i = 440000; i < 500000; i += 1000)
             for (uint i = 1; i < intGDur; i++)
             {
@@ -68,40 +67,17 @@ namespace PCSBeep
                 //System.Threading.Thread.Sleep(1);
             }
             StopBeep();
-            //test
         }
-*/
+
+        public void BeeperWithGlobalVariables()
+        {
+            while (blnBeep)
+            {
+                uint freq = 1193180000 / intGFreq;
+                PleaseBeep(freq);
+            }
+            StopBeep();
+        }
 //beep>
-        private Class1 Beep = new Class1();
-        public Form1()
-        {
-            InitializeComponent();
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            Beep.blnBeep = false;
-        }
-
-        private void BtnBeep_Click(object sender, EventArgs e)
-        {
-            /*
-            intGFreq = Convert.ToUInt32(tbFreq.Text);
-            intGDur = Convert.ToUInt32(tbDur.Text);
-            System.Threading.Thread t = new System.Threading.Thread(new System.Threading.ThreadStart(ThreadBeeper));
-            t.Start();
-            */
-            Beep.intGFreq = Convert.ToUInt32(tbFreq.Text);
-            Beep.intGDur = Convert.ToUInt32(tbDur.Text);
-            System.Threading.Thread t = new System.Threading.Thread(new System.Threading.ThreadStart(Beep.ThreadBeeper));
-            t.Start();
-
-        }
-
-        private void TestToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            FormForMousePointer FormMouse = new FormForMousePointer();
-            FormMouse.Show();
-        }
     }
 }
